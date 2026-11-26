@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruba's Little Happiness ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;
+ font-family:'Cairo',sans-serif;
+ color:#793b69;
+ text-align:center;
+ background:linear-gradient(140deg,#ffe0ed,#e8d9ff,#ffd9e8);
+ overflow-x:hidden;
+}
+.container{max-width:500px;margin:auto;padding:35px 20px 60px}
+h1{font-size:32px;color:#c34c91;margin-bottom:5px}
+.subtitle{font-size:15px;color:#98628e}
+.card{
+ background:#ffffffb9;
+ border:1px solid #ffffff;
+ border-radius:27px;
+ padding:24px 18px;
+ margin:20px 0;
+ box-shadow:0 10px 35px #c77eaa30;
+ backdrop-filter:blur(10px);
+}
+.heart{font-size:65px;animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.18)}}
+button{
+ border:0;border-radius:30px;
+ padding:13px 22px;margin:7px;
+ background:linear-gradient(120deg,#ee82b2,#bd8bea);
+ color:white;font-family:inherit;font-size:15px;
+ font-weight:bold;cursor:pointer;
+ box-shadow:0 5px 15px #bd8bea50;
+}
+button:active{transform:scale(.95)}
+.message{
+ min-height:90px;display:flex;
+ align-items:center;justify-content:center;
+ font-size:17px;font-weight:700;
+ line-height:2;padding:10px;
+}
+.hidden{display:none}
+.gift{font-size:85px;cursor:pointer;animation:beat 1.5s infinite}
+.small{font-size:13px;color:#a46e99}
+#floating{
+ position:fixed;bottom:-40px;
+ pointer-events:none;animation:float 6s linear forwards;
+ z-index:10;
+}
+@keyframes float{
+ to{transform:translateY(-110vh) rotate(360deg);opacity:0}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="heart">💗</div>
+<h1>Ruba's Little Happiness</h1>
+<div class="subtitle">A little world made just for you ✨</div>
+
+<div class="card">
+<h2>يا أحلى رُبى بالدنيا ❤️</h2>
+<p>عملتلك هالمكان الصغير كرمال شغلة وحدة...</p>
+<p><b>إنّي شوف ابتسامتك حتى لو كنتِ مش مبسوطة 🥹</b></p>
+<p class="small">كل كبسة هون مخبّى وراها شي إلك...</p>
+</div>
+
+<div class="card">
+<h3>💌 رسالة صغيرة إلك</h3>
+<div class="message" id="letter">
+يمكن ما بقدر شيل عنك كل شي مضايقك، بس فيني ضل حدّك وما خلّيك تحسي إنك لحالك ❤️
+</div>
+<button onclick="newMessage()">رسالة جديدة 💌</button>
+</div>
+
+<div class="card">
+<h3>🥺 شو حاسّة هلّق؟</h3>
+<button onclick="mood('sad')">زعلانة</button>
+<button onclick="mood('tired')">تعبانة</button>
+<button onclick="mood('happy')">مبسوطة</button>
+<div class="message" id="moodText">اختاري شعورك يا قلبي 💗</div>
+</div>
+
+<div class="card">
+<h3>🎁 في شي مخبّى إلك!</h3>
+<p>بس لازم تفتحيه بنفسك...</p>
+<div class="gift" onclick="openGift()">🎁</div>
+<div class="message" id="giftText">اضغطي على الهدية يا رُبى 🥰</div>
+</div>
+
+<div class="card">
+<h3>😂 تحدّي الابتسامة</h3>
+<p>ممنوع تكمّلي هالصفحة من دون ما تضحكي!</p>
+<button onclick="laugh()">اضغطي إذا بتقدري 😂</button>
+<div class="message" id="laughText"></div>
+</div>
+
+<div class="card">
+<div style="font-size:45px">💍❤️</div>
+<h2>وشغلة أخيرة...</h2>
+<p style="line-height:2">
+من بين كل الناس، قلبي اختارك إنتِ.<br>
+ومن بين كل الأماكن، مكاني المفضّل حدّك.<br>
+وإذا رجع فيني الزمن ألف مرة،<br>
+كل مرة رح اختارك من جديد يا رُبى.
+</p>
+<h2>بحبك قد الدني كلها ❤️</h2>
+<div class="small">Made with love, just for Ruba</div>
+</div>
+
+</div>
+
+<script>
+const messages=[
+"يا رُبى، إنتِ أحلى تفصيل صار بحياتي ❤️",
+"لو فيني حوّل كل نجمة بالسما لبوسة، كنت عطيتك السما كلها 🥹",
+"ضحكتك عندي أغلى من كل شي بالدنيا.",
+"ما بدي منك تكوني قوية كل الوقت، فيك تتعبي وأنا حدّك.",
+"إنتِ مش بس حبيبتي، إنتِ راحتي وأماني.",
+"كل يوم بحبك أكتر من اليوم اللي قبله 💗"
+];
+
+let index=0;
+function newMessage(){
+ document.getElementById('letter').innerText=messages[index];
+ index=(index+1)%messages.length;
+ hearts();
+}
+
+function mood(type){
+ const texts={
+ sad:"تعي لعندي يا روحي، خلّيني احضنك وننسى الدنيا شوي. أنا حدّك ❤️",
+ tired:"خلص اليوم ممنوع تتعبي حالك، إنتِ أميرة ولازم ترتاحي 👑",
+ happy:"هيك بدي ياكي دايماً! ضحكتك بتحلي كل شي بحياتي  🥹"
+ };
+ document.getElementById('moodText').innerText=texts[type];
+ hearts();
+}
+
+let opened=false;
+function openGift(){
+ if(opened)return;
+ opened=true;
+ document.getElementById('giftText').innerHTML=
+ "🎉 مفاجأة!!! <br><br> هديتي الحقيقية إلك هي وعد... <br> إني ضل حاول كون سبب بضحكتك، وضل اختارك كل يوم. <br><br> بحبك يا رُبى ❤️";
+ hearts();
+}
+
+const jokes=[
+"مرة سألت قلبي شو بدك؟ قالي رُبى، وسكّر على الموضوع ❤️",
+"انا  ... كل ما شوف اسمك بنسى شو كنت عم بعمل ",
+"تتذكري وقت كنت عصب شو قول عن حالي😂",
+": جهزب حالك للايام الحلوة يلي رح نعيشها",
+"انت مرتي يا قمري الحلوة💗"
+];
+let joke=0;
+function laugh(){
+ document.getElementById('laughText').innerText=jokes[joke];
+ joke=(joke+1)%jokes.length;
+ hearts();
+}
+
+function hearts(){
+ for(let i=0;i<12;i++){
+ let h=document.createElement('div');
+ h.id='floating';
+ h.innerText=['💗','💕','✨','💖'][Math.floor(Math.random()*4)];
+ h.style.left=Math.random()*100+'vw';
+ h.style.fontSize=(18+Math.random()*22)+'px';
+ h.style.animationDuration=(4+Math.random()*3)+'s';
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),7000);
+ }
+}
+setInterval(()=>{
+ let h=document.createElement('div');
+ h.id='floating';h.innerText='💕';
+ h.style.left=Math.random()*100+'vw';
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),6500);
+},1100);
+</script>
+</body>
+</html>
